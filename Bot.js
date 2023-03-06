@@ -79,8 +79,6 @@ wss.on('connection', (ws) => {
       }
     });
     
-
-
     // handle WebSocket close event
     ws.on('close', () => {
       console.log('WebSocket connection closed');
@@ -94,7 +92,7 @@ wss.on('connection', (ws) => {
 
   client.on('messageCreate', (message) => {
     console.log(`Listening for messages in channel: ${message.channel.name}`);
-    if (message.channelId === config.discord_channel_id) {
+    if (message.channelId === config.discord_channel_id && !message.author.bot) {
       console.log(`Received message from ${message.author.username}: ${message.content}`);
       try {
         const discordMessage = `${message.author.username}:${message.content}`;
